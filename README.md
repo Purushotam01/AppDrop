@@ -63,20 +63,19 @@ flutter build apk --release
 📁 Project Structure
 lib/
 ├── app/
-│   └── app.dart                     # App root, Themes & routing
+│   └── app.dart
 │
 ├── core/
-│   ├── constants/                   # App constants
 │   ├── models/
-│   │   ├── app_theme.dart           # Light/Dark theme config
-│   │   ├── component.dart           # Schema models
-│   │   └── page.dart                # Page schema
+│   │   ├── app_theme.dart
+│   │   ├── component.dart
+│   │   └── page.dart
 │   └── services/
-│       └── json_service.dart        # Loads + parses JSON
+│       └── json_service.dart
 │
 ├── home/
-│   ├── home_view.dart               # View
-│   └── home_viewmodel.dart          # ViewModel (logic/state)
+│   ├── home_view.dart
+│   └── home_viewmodel.dart
 │
 ├── utils/
 │   ├── audio_manager.dart
@@ -84,18 +83,21 @@ lib/
 │   └── responsive.dart
 │
 ├── widgets/
-│   ├── components/                  # Dynamic components
+│   ├── components/
 │   │   ├── banner_widget.dart
 │   │   ├── carousel_widget.dart
+│   │   ├── fullscreen_video_page.dart
 │   │   ├── grid_widget.dart
 │   │   ├── text_widget.dart
 │   │   └── video_widget.dart
-│   ├── placeholder/                 # Shimmer loaders
+│   ├── placeholder/
+│   │   └── shimmer_placeholder.dart
 │   ├── app_bar_painter.dart
-│   └── component_factory.dart       # Creates components dynamically
+│   └── component_factory.dart
 │
 ├── splash_screen.dart
 └── main.dart
+
 
 🧩 Component Schema Examples
 1. Banner Component
