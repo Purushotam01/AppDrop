@@ -7,7 +7,6 @@ A Flutter application that renders UI components dynamically from JSON schemas. 
 - **Dynamic UI Rendering**: Renders complete screens from JSON data stored in assets
 - **5 Component Types**: Banner, Carousel, Grid, Video, and Text
 - **MVVM Architecture**: Clean separation of concerns with Model-View-ViewModel pattern
-- **Dark Mode Support**: Complete theme system with light and dark modes
 - **Responsive Design**: Adapts to portrait and landscape orientations
 - **Video Playback**: Full-featured video player with controls and lifecycle management
 - **Image Caching**: Efficient image loading with `CachedNetworkImage`
