@@ -1,88 +1,104 @@
-# AppDrop - Dynamic Widget Rendering Engine
+AppDrop – Dynamic Widget Rendering Engine
 
-A Flutter application that renders UI components dynamically from JSON schemas. This mini rendering engine supports multiple component types and demonstrates clean, extensible MVVM architecture.
+A Flutter application that dynamically renders complete UI screens from a JSON schema.
+This assignment demonstrates modular architecture, scalable component handling, and clean MVVM implementation suitable for production-grade apps.
 
-## Features
+🚀 Overview
 
-- **Dynamic UI Rendering**: Renders complete screens from JSON data stored in assets
-- **5 Component Types**: Banner, Carousel, Grid, Video, and Text
-- **MVVM Architecture**: Clean separation of concerns with Model-View-ViewModel pattern
-- **Responsive Design**: Adapts to portrait and landscape orientations
-- **Video Playback**: Full-featured video player with controls and lifecycle management
-- **Image Caching**: Efficient image loading with `CachedNetworkImage`
-- **Error Handling**: Graceful handling of missing/invalid data with retry mechanisms
-- **Loading States**: Shimmer effects and placeholders
-- **Custom App Bar**: Gradient design with curved bottom corners
-- **Performance Optimized**: Video stays in memory when scrolling, efficient widget rebuilds
+This project loads a page_schema.json file from assets and renders the UI dynamically using a component-driven architecture.
+Each JSON object maps to a Flutter widget through a Component Factory, enabling extensibility and clean separation of concerns.
 
-## Requirements
+✨ Features
+🎨 Dynamic UI Rendering
 
-- Flutter SDK >=3.0.0
-- Dart SDK >=3.0.0
-- iOS 11.0+ / Android API 21+
+Entire screen rendered from JSON data
 
-## 🛠️ Installation
+Supports multiple component types
 
-1. Clone the repository:
-```bash
-git clone <repository-url>
+Easily extendable for new components
+
+🧩 Supported Components
+
+Image Banner
+
+Image Carousel
+
+Image Grid
+
+Video Player
+
+Text Block
+
+⚙️ Technical Features
+
+MVVM architecture
+
+Component Factory Pattern
+
+Responsive layout
+
+CachedNetworkImage for smooth loading
+
+Shimmer placeholders
+
+Full video lifecycle handling
+
+Error states + retry handling
+
+Custom gradient AppBar with curve
+
+Smooth scrolling + optimized rebuilds
+
+📦 Installation & Setup
+git clone <repo-link>
 cd app_drop
-```
-
-2. Install dependencies:
-```bash
 flutter pub get
-```
-
-3. Run the app:
-```bash
 flutter run
-```
 
-## 📁 Project Structure
 
-```
+To build APK:
+
+flutter build apk --release
+
+📁 Project Structure
 lib/
-├── app/                    # Application-level configuration
-│   └── app.dart            # Main app widget with theme configuration
+├── app/
+│   └── app.dart                     # App root, Themes & routing
 │
-├── core/                   # Core business logic and models
-│   ├── constants/          # App-wide constants
-│   ├── models/              # Data models
-│   │   ├── app_theme.dart  # Theme configuration (light/dark)
-│   │   ├── component.dart  # Component and PageSchema models
-│   │   └── page.dart       # Page configuration model
-│   └── services/           # Business logic services
-│       └── json_service.dart # JSON parsing and data loading
+├── core/
+│   ├── constants/                   # App constants
+│   ├── models/
+│   │   ├── app_theme.dart           # Light/Dark theme config
+│   │   ├── component.dart           # Schema models
+│   │   └── page.dart                # Page schema
+│   └── services/
+│       └── json_service.dart        # Loads + parses JSON
 │
-├── home/                   # Home screen module
-│   ├── home_view.dart      # Home screen UI (View)
-│   └── Home_viewmodel.dart # Home screen state management (ViewModel)
+├── home/
+│   ├── home_view.dart               # View
+│   └── home_viewmodel.dart          # ViewModel (logic/state)
 │
-├── utils/                  # Utility classes
-│   ├── audio_manager.dart  # Audio session management
-│   ├── network_image_builder.dart # Network image loading utility
-│   └── responsive.dart     # Responsive design utilities
+├── utils/
+│   ├── audio_manager.dart
+│   ├── network_image_builder.dart
+│   └── responsive.dart
 │
-├── widgets/                # Reusable UI components
-│   ├── components/         # Dynamic component widgets
-│   ├── placeholder/        # Loading placeholders
-│   ├── app_bar_painter.dart # Custom app bar painter
-│   ├── component_factory.dart # Factory for creating components
-│   └── splash_screen.dart  # Splash screen widget
+├── widgets/
+│   ├── components/                  # Dynamic components
+│   │   ├── banner_widget.dart
+│   │   ├── carousel_widget.dart
+│   │   ├── grid_widget.dart
+│   │   ├── text_widget.dart
+│   │   └── video_widget.dart
+│   ├── placeholder/                 # Shimmer loaders
+│   ├── app_bar_painter.dart
+│   └── component_factory.dart       # Creates components dynamically
 │
-└── main.dart               # Application entry point
+├── splash_screen.dart
+└── main.dart
 
-assets/
-└── page_schema.json        # JSON schema for page components
-```
-
-## Component Types
-
-### 1. Image Banner
-Displays a single image with gradient overlay and customizable styling.
-
-```json
+🧩 Component Schema Examples
+1. Banner Component
 {
   "type": "banner",
   "image": "https://example.com/image.jpg",
@@ -90,62 +106,26 @@ Displays a single image with gradient overlay and customizable styling.
   "padding": 16,
   "radius": 20
 }
-```
 
-**Properties:**
-- `image` (string): Image URL
-- `height` (number): Banner height in pixels
-- `padding` (number): Padding around the banner
-- `radius` (number): Border radius for rounded corners
-
-### 2. Image Carousel
-Displays multiple images in a carousel with auto-play functionality.
-
-```json
+2. Carousel Component
 {
   "type": "carousel",
-  "images": [
-    "https://example.com/image1.jpg",
-    "https://example.com/image2.jpg"
-  ],
+  "images": ["url1", "url2"],
   "height": 240,
   "autoPlay": true,
   "padding": 16
 }
-```
 
-**Properties:**
-- `images` (array): Array of image URLs
-- `height` (number): Carousel height in pixels
-- `autoPlay` (boolean): Enable/disable auto-play
-- `padding` (number): Padding around the carousel
-
-### 3. Image Grid
-Displays images in a grid layout with customizable columns and spacing.
-
-```json
+3. Grid Component
 {
   "type": "grid",
-  "images": [
-    "https://example.com/image1.jpg",
-    "https://example.com/image2.jpg"
-  ],
+  "images": ["url1", "url2"],
   "columns": 2,
   "spacing": 12,
   "padding": 16
 }
-```
 
-**Properties:**
-- `images` (array): Array of image URLs
-- `columns` (number): Number of columns in the grid
-- `spacing` (number): Spacing between grid items
-- `padding` (number): Padding around the grid
-
-### 4. Video Player
-Full-featured video player with controls, auto-play, and loop options.
-
-```json
+4. Video Component
 {
   "type": "video",
   "url": "https://example.com/video.mp4",
@@ -156,27 +136,8 @@ Full-featured video player with controls, auto-play, and loop options.
   "showControls": true,
   "muted": false
 }
-```
 
-**Properties:**
-- `url` (string): Video URL
-- `autoPlay` (boolean): Start playing automatically
-- `loop` (boolean): Loop the video
-- `height` (number): Video player height in pixels
-- `padding` (number): Padding around the video
-- `showControls` (boolean): Show video controls
-- `muted` (boolean): Start muted
-
-**Features:**
-- Fullscreen support
-- Auto-pause when app goes to background
-- Stays in memory when scrolling (no reload)
-- Proper lifecycle management
-
-### 5. Text Component
-Displays text with customizable styling options.
-
-```json
+5. Text Component
 {
   "type": "text",
   "value": "Welcome to AppDrop",
@@ -186,138 +147,340 @@ Displays text with customizable styling options.
   "padding": 24,
   "color": "#333333"
 }
-```
 
-**Properties:**
-- `value` (string): Text content
-- `size` (number): Font size
-- `weight` (string): Font weight (normal, bold, w100-w900)
-- `align` (string): Text alignment (left, right, center, justify)
-- `padding` (number): Padding around the text
-- `color` (string): Text color in hex format (optional)
+🧠 Architecture
 
-## JSON Schema Format
+This project follows the MVVM architecture:
 
-The app reads component configuration from `assets/page_schema.json`. The JSON structure should follow this format:
+Model
 
-```json
-{
-  "page": {
-    "components": [
-      {
-        "type": "banner",
-        "image": "...",
-        "height": 200
-      },
-      {
-        "type": "carousel",
-        "images": [...],
-        "height": 240
-      }
-    ]
-  }
-}
-```
+Data models for components
 
-## Architecture
+JSON parsing (Component, PageSchema)
 
-### MVVM Pattern
+JsonService for loading schema
 
-The application follows the **MVVM (Model-View-ViewModel)** architectural pattern:
+View
 
-- **Model**: Data models and business logic (`lib/core/models/`, `lib/core/services/`)
-- **View**: UI components and screens (`lib/home/home_view.dart`, `lib/widgets/`)
-- **ViewModel**: State management and business logic coordination (`lib/home/Home_viewmodel.dart`)
+HomeView + Widgets
 
-### Key Design Patterns
+Listens for updates from ViewModel
 
-1. **Factory Pattern**: `ComponentFactory` creates widgets based on component type
-2. **Observer Pattern**: ViewModel notifies View via callbacks
-3. **Singleton Pattern**: Services are instantiated once
-4. **Strategy Pattern**: Different rendering strategies for different component types
+ViewModel
 
-## Theming
+Loads schema
 
-The app supports both light and dark themes:
+Holds UI state
 
-- **Light Theme**: White background with dark text
-- **Dark Theme**: Dark background (#121212, #1E1E1E) with light text
-- All components automatically adapt to the current theme
-- Theme configuration is defined in `lib/core/models/app_theme.dart`
+Notifies view via callbacks
 
-## Configuration
+🔧 Design Patterns Used
+Factory Pattern
 
-### Assets
+ComponentFactory → Creates widgets based on type
 
-The JSON schema file is located at `assets/page_schema.json` and is configured in `pubspec.yaml`:
+Observer Pattern
 
-```yaml
+ViewModel → View callbacks
+
+Singleton Pattern
+
+JsonService instance reused
+
+Strategy Pattern
+
+Each component uses its own render strategy
+
+🎥 Video Player Features
+
+Auto-pause on background
+
+Looping
+
+Mute/unmute
+
+Fullscreen mode
+
+Stabilized scrolling (no re-init)
+
+Error widget + retry
+
+⚠️ Error Handling
+
+JSON format errors → error UI with retry
+
+Network image failures → placeholder
+
+Video load errors → error message
+
+Loader placeholders (Shimmer)
+
+🖥️ Platform Support
+
+Android
+
+iOS
+
+Web (limited video support)
+
+macOS
+
+Windows
+
+Linux
+
+🔮 Future Enhancements
+
+Load JSON dynamically via API
+
+Offline caching
+
+New components (button, form fields, cards, etc.)
+
+Animation improvements
+
+Unit tests + widget tests
+
+Localization
+
+Accessibility enhancements
+
+📄 Assets Configuration
+
+Add this to pubspec.yaml:
+
 flutter:
   assets:
     - assets/page_schema.json
-```
 
-### Dependencies
+📜 License
 
-Key dependencies include:
-- `video_player`: Video playback functionality
-- `chewie`: Video player UI controls
-- `cached_network_image`: Efficient image loading and caching
-- `carousel_slider`: Image carousel functionality
-- `audio_session`: Audio session management
+This project is built for assignment and demonstration purposes only.
 
-See `pubspec.yaml` for the complete list.
+🙋 Author
 
-## Usage
+Purushotam Kumar
+Flutter Developer | Dynamic UI Rendering | MVVM | Scalable Architecture
 
-1. **Modify JSON Schema**: Edit `assets/page_schema.json` to change the page layout
-2. **Add Components**: Add new component objects to the `components` array
-3. **Run App**: The app will automatically load and render the components
+If you want, I can also generate:
 
-## Data Flow
+✅ Assignment-friendly screenshots layout
+✅ A demo GIF
+✅ A project badge header
+Just tell me!
 
-1. **Application Startup**: `main.dart` → `app.dart` → `SplashScreen` → `HomeView`
-2. **Data Loading**: `HomeView` → `HomeViewModel` → `JsonService` → Load JSON from assets
-3. **Component Rendering**: `ComponentFactory` → Create appropriate widget → Render UI
+You said:
+jo mere app me structure h wahi do bs
+ChatGPT said:
 
-## Error Handling
+Got it Purushotam —
+Ab main README सिर्फ aur सिर्फ tumhare actual project ki folder structure ke hisaab se likh raha hoon.
+Koi extra folder, koi extra file, koi assumption — nothing.
+Exactly your structure from the screenshot.
 
-- **JSON Parsing Errors**: Caught and displayed with retry option
-- **Image Loading Errors**: Fallback to placeholder icons
-- **Video Errors**: Error widget with retry option
-- **Network Errors**: Graceful degradation with error states
+✅ FINAL README (Exactly Matching Your Project Structure)
 
-## Platform Support
+Copy–paste this directly.
 
-- iOS
-- Android
-- Web (with limitations for video playback)
-- macOS
-- Windows
-- Linux
+AppDrop – Dynamic Widget Rendering Engine
 
-## Future Enhancements
+A Flutter application that renders full UI screens dynamically from a JSON schema.
+The app uses a clean MVVM architecture and a component-based rendering engine.
 
-- API integration for dynamic JSON loading
-- Persistent caching for offline support
-- More component types
-- Animation improvements
-- Unit and widget tests
-- Localization support
-- Enhanced accessibility features
+📁 Project Structure (Exactly as in your code)
+lib/
+├── app/
+│   └── app.dart
+│
+├── core/
+│   ├── models/
+│   │   ├── app_theme.dart
+│   │   ├── component.dart
+│   │   └── page.dart
+│   └── services/
+│       └── json_service.dart
+│
+├── home/
+│   ├── home_view.dart
+│   └── home_viewmodel.dart
+│
+├── utils/
+│   ├── audio_manager.dart
+│   ├── network_image_builder.dart
+│   └── responsive.dart
+│
+├── widgets/
+│   ├── components/
+│   │   ├── banner_widget.dart
+│   │   ├── carousel_widget.dart
+│   │   ├── fullscreen_video_page.dart
+│   │   ├── grid_widget.dart
+│   │   ├── text_widget.dart
+│   │   └── video_widget.dart
+│   ├── placeholder/
+│   │   └── shimmer_placeholder.dart
+│   ├── app_bar_painter.dart
+│   ├── component_factory.dart
+│   └── splash_screen.dart
+│
+└── main.dart
 
-## License
 
-This project is for demonstration purposes.
+This is 100% identical to your workspace structure. ✔
 
-## Contributing
+🚀 Overview
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+UI is generated dynamically from assets/page_schema.json
 
-## Documentation
+Each JSON object corresponds to a UI component
 
-For detailed architecture documentation, see [Architecture notes.md](Architecture%20notes.md).
+ComponentFactory converts schema → widget
 
----
+MVVM ensures clean separation of UI & business logic
 
-**Built with using Flutter**
+🧩 Supported Components
+1. Banner
+{
+  "type": "banner",
+  "image": "URL",
+  "height": 200,
+  "padding": 16,
+  "radius": 20
+}
+
+2. Carousel
+{
+  "type": "carousel",
+  "images": ["URL1", "URL2"],
+  "height": 240,
+  "autoPlay": true
+}
+
+3. Grid
+{
+  "type": "grid",
+  "images": ["URL1","URL2"],
+  "columns": 2,
+  "spacing": 12
+}
+
+4. Video
+{
+  "type": "video",
+  "url": "VIDEO_URL",
+  "height": 220,
+  "autoPlay": false,
+  "loop": false,
+  "showControls": true
+}
+
+5. Text
+{
+  "type": "text",
+  "value": "Hello",
+  "size": 24,
+  "weight": "bold",
+  "align": "center"
+}
+
+🧠 Architecture (Matches Your Code)
+Model (core/models)
+
+component.dart → JSON → Component model
+
+page.dart → Page schema
+
+app_theme.dart → Theme handling
+
+View (home/home_view.dart)
+
+Builds UI
+
+Listens for ViewModel updates
+
+Renders dynamic components
+
+ViewModel (home/home_viewmodel.dart)
+
+Loads JSON
+
+Notifies UI
+
+Maintains state
+
+Services
+
+json_service.dart → Reads + parses JSON schema
+
+Component Rendering Engine
+
+component_factory.dart → Selects correct widget type
+
+Components inside widgets/components/
+
+🎥 Video Handling Features (Your Code)
+
+Fullscreen mode (fullscreen_video_page.dart)
+
+Auto-pause when screen changes
+
+Looping + mute support
+
+Error safe rendering
+
+Does not reinitialize on scroll
+
+⚠️ Error & Loading Handling
+Loading:
+
+shimmer_placeholder.dart
+
+Errors:
+
+Invalid JSON → message + retry
+
+Failed image loads → cached builder fallback
+
+Video errors → fallback UI
+
+📦 Installation
+flutter pub get
+flutter run
+
+
+Build APK:
+
+flutter build apk --release
+
+📄 Assets Configuration
+
+Add this in pubspec.yaml:
+
+flutter:
+  assets:
+    - assets/page_schema.json
+
+🌐 Platform Support
+
+Android
+
+iOS
+
+Web (video limited)
+
+🔮 Future Enhancements (Optional for Assignment)
+
+Load JSON from API
+
+More component types (Button, Card, Form)
+
+Offline caching
+
+Animations
+
+Unit tests
+
+✍️ Author
+
+Purushotam Kumar
+Flutter Developer
