@@ -1,0 +1,13 @@
+name: carousel_slider
+description: Local lightweight replacement for carousel_slider to avoid upstream name conflict.
+version: 0.0.1
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+flutter:
+  plugin:
+    platforms: {}

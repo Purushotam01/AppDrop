@@ -1,0 +1,56 @@
+{
+  "page": {
+    "components": [
+      {
+        "type": "banner",
+        "image": "https://images.unsplash.com/photo-1526478806334-5fd488fcaabc?w=1200&auto=format&fit=crop",
+        "height": 200,
+        "padding": 16,
+        "radius": 20
+      },
+      {
+        "type": "carousel",
+        "images": [
+          "https://images.unsplash.com/photo-1526478806334-5fd488fcaabc?w=800&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1523437113738-bbd3cc89fb19?w=800&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=800&auto=format&fit=crop"
+        ],
+        "height": 240,
+        "autoPlay": true,
+        "padding": 16
+      },
+      {
+        "type": "grid",
+        "images": [
+          "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1578303512597-81e6cc155b3e?w=400&auto=format&fit=crop"
+        ],
+        "columns": 2,
+        "spacing": 12,
+        "padding": 16
+      },
+      {
+        "type": "video",
+        "url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+        "autoPlay": false,
+        "loop": false,
+        "height": 190,
+        "padding": 16,
+        "showControls": true,
+        "muted": false
+      },
+      {
+        "type": "text",
+        "value": "Welcome to AppDrop",
+        "size": 24,
+        "weight": "bold",
+        "align": "center",
+        "padding": 24,
+        "color": "#333333"
+      }
+    ]
+  }
+}
+
